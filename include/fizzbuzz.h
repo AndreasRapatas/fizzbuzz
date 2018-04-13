@@ -1,8 +1,8 @@
 #ifndef FIZZBUZZ_H
 #define FIZZBUZZ_H
 
-#include <iostream>
 #include <vector>
+#include <map>
 #include <sstream>
 #include <algorithm>
 
@@ -23,36 +23,10 @@ struct Rule {
 	{}
 };
 
-void fizzbuzz(
+std::map<unsigned, std::string> fizzbuzz(
 	unsigned start,
 	unsigned finish,
 	std::vector<Rule> rules
-) {
-	std::sort(
-		rules.begin(),
-		rules.end(),
-		[] (const Rule &lhs, const Rule &rhs) {
-			return lhs.priority > rhs.priority;
-		}
-	);
-
-	for (size_t i = start; i != finish + 1; ++i) {
-
-		std::stringstream output("");
-
-		for (const auto &r : rules) {
-
-			if (i % r.number == 0) {
-				output << r.word;
-			}
-		}
-
-		if (output.str() == "") {
-			output << i;
-		}
-
-		std::cout << output.str() << '\n';
-	}
-}
+);
 
 #endif // FIZZBUZZ_H

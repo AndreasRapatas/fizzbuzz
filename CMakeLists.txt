@@ -39,9 +39,10 @@ target_link_libraries(
 		${PROJECT_NAME}
 )
 
+include(CTest)
 if (BUILD_TESTING)
 	add_test(
 		NAME ${PROJECT_NAME}_unit_test
-		COMMAND ${PROJECT_NAME}
+		COMMAND ${PROJECT_NAME}_unit_test
 	)
 endif()

@@ -1,7 +1,9 @@
 cmake_minimum_required(VERSION 3.0)
 
-set(CMAKE_CXX_STANDARD 11)
+# Required for YCM to work
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+set(CMAKE_CXX_STANDARD 11)
 
 project(
 	fizzbuzz
@@ -14,6 +16,12 @@ add_library(
 	./src/fizzbuzz.cpp
 )
 
+set_target_properties(
+	${PROJECT_NAME}
+	PROPERTIES
+		PUBLIC_HEADER
+			./include/fizzbuzz.h
+)
 
 target_include_directories(
 	${PROJECT_NAME}
@@ -22,27 +30,27 @@ target_include_directories(
 		$<INSTALL_INTERFACE:include>
 )
 
-set_target_properties(
-	PROPERTIES
-		PUBLIC_HEADER
-			./include/fizzbuzz.h
-)
-
-add_executable(
-	${PROJECT_NAME}_unit_test
-	./tests/main.cpp
-)
-
-target_link_libraries(
-	${PROJECT_NAME}_unit_test
-	PRIVATE
-		${PROJECT_NAME}
-)
+# =======
+# Testing
+# =======
 
 include(CTest)
 if (BUILD_TESTING)
+
+	add_executable(
+		${PROJECT_NAME}_unit_test
+		./tests/main.cpp
+	)
+
+	target_link_libraries(
+		${PROJECT_NAME}_unit_test
+		PRIVATE
+			${PROJECT_NAME}
+	)
+
 	add_test(
 		NAME ${PROJECT_NAME}_unit_test
 		COMMAND ${PROJECT_NAME}_unit_test
 	)
+
 endif()

@@ -38,19 +38,19 @@ include(CTest)
 if (BUILD_TESTING)
 
 	add_executable(
-		${PROJECT_NAME}_unit_test
+		test_${PROJECT_NAME}
 		./tests/main.cpp
 	)
 
 	target_link_libraries(
-		${PROJECT_NAME}_unit_test
+		test_${PROJECT_NAME}
 		PRIVATE
 			${PROJECT_NAME}
 	)
 
 	add_test(
-		NAME ${PROJECT_NAME}_unit_test
-		COMMAND ${PROJECT_NAME}_unit_test
+		NAME test_${PROJECT_NAME}
+		COMMAND test_${PROJECT_NAME}
 	)
 
 endif()

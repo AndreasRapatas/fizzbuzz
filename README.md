@@ -1,4 +1,4 @@
-# lib_fizzbuzz
+# fizzbuzz
 A C++ library implementing the game FizzBuzz
 # Features
 * Maps each value to the resulting string

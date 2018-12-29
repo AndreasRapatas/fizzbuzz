@@ -16,9 +16,9 @@ struct Rule {
 		unsigned number,
 		const std::string &word
 	) :
-		priority(priority)
-		, number(number)
-		, word(word)
+		priority(priority),
+		number(number),
+		word(word)
 	{}
 };
 

@@ -3,9 +3,7 @@
 #include <algorithm>
 #include <sstream>
 
-using namespace std;
-
-map<unsigned, string> fizzbuzz(
+std::map<unsigned, std::string> fizzbuzz(
 	unsigned start,
 	unsigned finish,
 	std::vector<Rule> rules
@@ -18,7 +16,7 @@ map<unsigned, string> fizzbuzz(
 		}
 	);
 
-	map<unsigned, string> result;
+	std::map<unsigned, std::string> result;
 
 	for (size_t i = start; i != finish; ++i) {
 

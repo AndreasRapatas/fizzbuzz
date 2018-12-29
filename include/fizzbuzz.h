@@ -2,9 +2,8 @@
 #define FIZZBUZZ_H
 
 #include <vector>
+#include <string>
 #include <map>
-#include <sstream>
-#include <algorithm>
 
 struct Rule {
 

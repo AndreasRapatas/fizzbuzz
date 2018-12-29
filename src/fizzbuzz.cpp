@@ -1,5 +1,8 @@
 #include "../include/fizzbuzz.h"
 
+#include <algorithm>
+#include <sstream>
+
 using namespace std;
 
 map<unsigned, string> fizzbuzz(

@@ -3,7 +3,7 @@
 
 int main() {
 
-	auto result = fizzbuzz(1, 50, {
+	auto result = fizzbuzz(1, 20, {
 		{800, 3, "Fizz"},
 		{500, 5, "Buzz"},
 		{700, 9, "Haxx"}
@@ -27,6 +27,7 @@ int main() {
 	assert(result[16] == "16");
 	assert(result[17] == "17");
 	assert(result[18] == "FizzHaxx");
+	assert(result[19] == "19");
 
 	return 0;
 }

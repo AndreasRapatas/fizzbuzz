@@ -1,15 +1,12 @@
 cmake_minimum_required(VERSION 3.0)
 
-# Required for YCM to work
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-
-set(CMAKE_CXX_STANDARD 11)
-
 project(
 	fizzbuzz
 	VERSION 1.0.2
 	LANGUAGES CXX
 )
+
+# Definitions {{{
 
 add_library(
 	${PROJECT_NAME}
@@ -30,11 +27,10 @@ target_include_directories(
 		$<INSTALL_INTERFACE:include>
 )
 
-# =======
-# Testing
-# =======
+# }}}
 
-include(CTest)
+# Testing {{{
+
 if (BUILD_TESTING)
 
 	add_executable(
@@ -55,9 +51,9 @@ if (BUILD_TESTING)
 
 endif()
 
-# =======
-# Install
-# =======
+# }}}
+
+# Installation {{{
 
 include(CMakePackageConfigHelpers)
 
@@ -100,3 +96,5 @@ install(
 	NAMESPACE   ${PROJECT_NAME}::
 	DESTINATION ${destination}
 )
+
+# }}}

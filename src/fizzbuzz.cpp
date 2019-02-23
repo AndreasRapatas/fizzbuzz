@@ -1,7 +1,6 @@
 #include "../include/fizzbuzz.h"
 
 #include <algorithm>
-#include <sstream>
 
 std::map<unsigned, std::string> fizzbuzz(
 	unsigned start,
@@ -20,20 +19,20 @@ std::map<unsigned, std::string> fizzbuzz(
 
 	for (size_t i = start; i != finish; ++i) {
 
-		std::stringstream output("");
+		std::string output;
 
 		for (const auto &r : rules) {
 
 			if (i % r.number == 0) {
-				output << r.word;
+				output += r.word;
 			}
 		}
 
-		if (output.str() == "") {
-			output << i;
+		if (output.size() == 0) {
+			output = std::to_string(i);
 		}
 
-		result[i] = output.str();
+		result[i] = output;
 	}
 
 	return result;

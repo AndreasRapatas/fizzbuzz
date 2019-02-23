@@ -7,18 +7,18 @@
 
 struct Rule {
 
-	unsigned priority;
-	unsigned number;
 	std::string word;
+	unsigned number;
+	unsigned priority;
 
 	Rule(
-		unsigned priority,
+		const std::string &word,
 		unsigned number,
-		const std::string &word
+		unsigned priority
 	) :
-		priority(priority),
+		word(word),
 		number(number),
-		word(word)
+		priority(priority)
 	{}
 };
 

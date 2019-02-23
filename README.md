@@ -12,8 +12,8 @@ From 1 to 49 with rules:
 * Fizz comes before Haxx comes before Buzz!
 ```c++
 map<unsigned, string> result = fizzbuzz(1, 50, {
-  {800, 3, "Fizz"},
-  {500, 5, "Buzz"},
-  {700, 9, "Haxx"}
+	{"Fizz", 3, 800},
+	{"Buzz", 5, 500},
+	{"Haxx", 9, 700}
 });
 ```

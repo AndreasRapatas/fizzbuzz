@@ -4,9 +4,9 @@
 int main() {
 
 	auto result = fizzbuzz(1, 20, {
-		{800, 3, "Fizz"},
-		{500, 5, "Buzz"},
-		{700, 9, "Haxx"}
+		{"Fizz", 3, 800},
+		{"Buzz", 5, 500},
+		{"Haxx", 9, 700}
 	});
 
 	assert(result[1] == "1");

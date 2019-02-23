@@ -8,23 +8,20 @@ project(
 
 # Definitions {{{
 
-add_library(
-	${PROJECT_NAME}
+set(
+	${PROJECT_NAME}_src
 	./src/fizzbuzz.cpp
 )
 
-set_target_properties(
-	${PROJECT_NAME}
-	PROPERTIES
-		PUBLIC_HEADER
-			./include/fizzbuzz.h
+set(
+	${PROJECT_NAME}_headers
+	./include/fizzbuzz.h
 )
 
-target_include_directories(
+add_library(
 	${PROJECT_NAME}
-	PUBLIC
-		$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-		$<INSTALL_INTERFACE:include>
+	SHARED
+	${${PROJECT_NAME}_src}
 )
 
 # }}}
@@ -34,19 +31,19 @@ target_include_directories(
 if (BUILD_TESTING)
 
 	add_executable(
-		test_${PROJECT_NAME}
+		${PROJECT_NAME}_test
 		./tests/main.cpp
 	)
 
 	target_link_libraries(
-		test_${PROJECT_NAME}
+		${PROJECT_NAME}_test
 		PRIVATE
 			${PROJECT_NAME}
 	)
 
 	add_test(
-		NAME test_${PROJECT_NAME}
-		COMMAND test_${PROJECT_NAME}
+		NAME ${PROJECT_NAME}_test
+		COMMAND ${PROJECT_NAME}_test
 	)
 
 endif()
@@ -55,14 +52,21 @@ endif()
 
 # Installation {{{
 
-include(CMakePackageConfigHelpers)
-
 set(destination lib/cmake/${PROJECT_NAME})
+
+# Packaging {{{
+
+include(CMakePackageConfigHelpers)
 
 write_basic_package_version_file(
 	"${PROJECT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake"
 	VERSION ${PROJECT_VERSION}
 	COMPATIBILITY AnyNewerVersion
+)
+
+install(
+	FILES "${PROJECT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake"
+	DESTINATION ${destination}
 )
 
 configure_package_config_file(
@@ -72,22 +76,21 @@ configure_package_config_file(
 )
 
 install(
-	FILES
-		"${PROJECT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake"
-		"${PROJECT_BINARY_DIR}/${PROJECT_NAME}Config.cmake"
+	FILES "${PROJECT_BINARY_DIR}/${PROJECT_NAME}Config.cmake"
 	DESTINATION ${destination}
 )
 
+# }}}
+
 install(
-	TARGETS       ${PROJECT_NAME}
-	EXPORT        ${PROJECT_NAME}Targets
+	TARGETS ${PROJECT_NAME}
+	EXPORT  ${PROJECT_NAME}Targets
+	LIBRARY DESTINATION lib COMPONENT Development
+)
 
-	LIBRARY       DESTINATION lib                     COMPONENT Runtime
-	RUNTIME       DESTINATION bin                     COMPONENT Runtime
-	BUNDLE        DESTINATION bin                     COMPONENT Runtime
-
-	ARCHIVE       DESTINATION lib                     COMPONENT Development
-	PUBLIC_HEADER DESTINATION include/${PROJECT_NAME} COMPONENT Development
+install(
+	FILES ${${PROJECT_NAME}_headers}
+	DESTINATION include
 )
 
 install(
